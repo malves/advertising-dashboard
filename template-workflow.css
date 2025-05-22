@@ -1,0 +1,413 @@
+/* Styles pour les templates d'automatisation et les workflows */
+
+/* Breadcrumb */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: #1c3542;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb i {
+    font-size: 10px;
+    margin: 0 10px;
+    color: #888;
+}
+
+.breadcrumb span {
+    color: #666;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #333;
+}
+
+.btn-secondary i {
+    margin-right: 8px;
+}
+
+/* Template Settings */
+.template-settings-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.template-settings {
+    margin-top: 16px;
+}
+
+.settings-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.settings-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-form label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.settings-form input,
+.settings-form select {
+    padding: 12px 16px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.settings-form input:focus,
+.settings-form select:focus {
+    border-color: #1c3542;
+    outline: none;
+}
+
+/* Workflow Editor */
+.workflow-editor-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.workflow-canvas {
+    margin-top: 24px;
+    padding: 20px;
+    min-height: 500px;
+    background-color: #D1DBD2;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Workflow Nodes */
+.workflow-node {
+    width: 320px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1;
+}
+
+.workflow-node.branch-node {
+    z-index: 0;
+}
+
+.node-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eaeaea;
+    border-radius: 12px 12px 0 0;
+}
+
+.node-header i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.node-header h4 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.node-content {
+    padding: 16px;
+}
+
+.node-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+.node-actions {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+}
+
+.node-actions button {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #f5f5f5;
+    color: #555;
+    cursor: pointer;
+}
+
+.node-actions button:hover {
+    background-color: #eaeaea;
+}
+
+.node-connector {
+    position: relative;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.connector-line {
+    width: 2px;
+    height: 40px;
+    background-color: #ccc;
+}
+
+.connector-dot {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Node types */
+.workflow-node.trigger .node-header {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.workflow-node.wait .node-header {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.workflow-node.action .node-header {
+    background-color: #f9fbe7;
+    color: #9e9d24;
+}
+
+.workflow-node.condition .node-header {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+/* Node branches for conditions */
+.node-branches {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.branch-label {
+    padding: 4px 12px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.branch-connector {
+    position: relative;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.branch .connector-line {
+    width: 2px;
+    height: 50px;
+    background-color: #ccc;
+}
+
+/* Email preview in node */
+.node-email-preview {
+    font-size: 13px;
+}
+
+.node-email-preview .email-subject {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.node-email-preview .email-body {
+    color: #666;
+    line-height: 1.4;
+}
+
+.node-email-preview .email-body p {
+    margin-bottom: 4px;
+}
+
+/* Email Preview section */
+.email-preview-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    padding: 0;
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.email-preview {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-preview-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #f9f9f9;
+}
+
+.preview-info {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.email-preview-content {
+    padding: 24px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.email-template {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.email-body-content {
+    padding: 32px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.email-body-content h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: #1c3542;
+}
+
+.email-body-content p {
+    margin-bottom: 16px;
+}
+
+.email-body-content ul {
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+.email-body-content ul li {
+    margin-bottom: 8px;
+}
+
+.cta-button {
+    margin: 24px 0;
+    text-align: center;
+}
+
+.cta-button .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #00b450;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.email-footer {
+    padding: 16px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.email-footer a {
+    color: #1c3542;
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .settings-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .workflow-node {
+        width: 280px;
+    }
+    
+    .workflow-node.branch-node {
+        margin-left: 0 !important;
+    }
+    
+    .node-branches {
+        flex-direction: column;
+    }
+    
+    .branch {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+} 

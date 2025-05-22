@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emitly - Template Événement Spécial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="automation.css">
+    <link rel="stylesheet" href="template-workflow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>emitly</h1>
+            </div>
+            <div class="workspace">
+                <div class="workspace-header">
+                    <div class="lock-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="workspace-title">
+                        <h3>My Workspace</h3>
+                        <p>Free plan</p>
+                    </div>
+                    <div class="dropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="create-campaign.html">
+                            <i class="fas fa-plus"></i>
+                            <span>Create campaign</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="automation.html">
+                            <i class="fas fa-robot"></i>
+                            <span>Automation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-list"></i>
+                            <span>Subscriptions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>AI Chatbot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-plug"></i>
+                            <span>Integrations</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile-sidebar">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                </div>
+                <div class="user-info">
+                    <h4>James Passaquindici</h4>
+                    <p>jamespass@em.com</p>
+                </div>
+                <div class="settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                    <div class="search-shortcuts">
+                        <span>⌘</span>
+                        <span>K</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-button">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <button class="icon-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <div class="user-info">
+                            <h4>James Passaquindici</h4>
+                            <p>ID: 4827692</p>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Template Content -->
+            <div class="dashboard-content">
+                <div class="breadcrumb">
+                    <a href="automation.html">Automation</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Template: Événement Spécial</span>
+                </div>
+
+                <div class="dashboard-header">
+                    <div>
+                        <h2>Template: Événement Spécial</h2>
+                        <p>Communications pour un événement à venir</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-secondary">
+                            <i class="fas fa-save"></i>
+                            Enregistrer
+                        </button>
+                        <button class="create-campaigns-btn">
+                            <i class="fas fa-play"></i>
+                            Activer l'automation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Template Settings -->
+                <section class="template-settings-card">
+                    <div class="card-header">
+                        <h3>Paramètres du template</h3>
+                    </div>
+                    <div class="template-settings">
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label for="template-name">Nom de l'automation</label>
+                                <input type="text" id="template-name" value="Promotion Black Friday">
+                            </div>
+                            <div class="form-group">
+                                <label for="template-type">Type d'événement</label>
+                                <select id="template-type">
+                                    <option value="promotion" selected>Promotion commerciale</option>
+                                    <option value="webinar">Webinaire</option>
+                                    <option value="conference">Conférence</option>
+                                    <option value="holiday">Fête / Jour férié</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="template-date">Date de l'événement</label>
+                                <input type="date" id="template-date" value="2024-11-29">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Workflow Editor -->
+                <section class="workflow-editor-card">
+                    <div class="card-header">
+                        <h3>Éditeur de workflow</h3>
+                        <div class="editor-actions">
+                            <button class="btn-filter">
+                                <i class="fas fa-plus"></i>
+                                Ajouter une étape
+                            </button>
+                            <button class="btn-more">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="workflow-canvas">
+                        <!-- Trigger -->
+                        <div class="workflow-node trigger">
+                            <div class="node-header">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h4>Déclencheur</h4>
+                            </div>
+                            <div class="node-content">
+                                <p>Démarrage manuel (15 jours avant l'événement)</p>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Email node 1 - Teaser -->
+                        <div class="workflow-node action">
+                            <div class="node-header">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email</h4>
+                            </div>
+                            <div class="node-content">
+                                <div class="node-email-preview">
+                                    <div class="email-subject">Black Friday arrive bientôt ! Préparez-vous 🔥</div>
+                                    <div class="email-body">
+                                        <p>Bonjour {{prénom}},</p>
+                                        <p>Notre plus grande vente de l'année approche à grands pas...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Wait node 1 -->
+                        <div class="workflow-node wait">
+                            <div class="node-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>Attendre</h4>
+                            </div>
+                            <div class="node-content">
+                                <p>Attendre 7 jours</p>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Email node 2 - Preview -->
+                        <div class="workflow-node action">
+                            <div class="node-header">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email</h4>
+                            </div>
+                            <div class="node-content">
+                                <div class="node-email-preview">
+                                    <div class="email-subject">Aperçu exclusif des offres Black Friday ✨</div>
+                                    <div class="email-body">
+                                        <p>Cher(e) {{prénom}},</p>
+                                        <p>Voici un aperçu des offres exceptionnelles qui vous attendent...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Wait node 2 -->
+                        <div class="workflow-node wait">
+                            <div class="node-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>Attendre</h4>
+                            </div>
+                            <div class="node-content">
+                                <p>Attendre 6 jours</p>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Email node 3 - Launch -->
+                        <div class="workflow-node action">
+                            <div class="node-header">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email</h4>
+                            </div>
+                            <div class="node-content">
+                                <div class="node-email-preview">
+                                    <div class="email-subject">🚨 ÉVÉNEMENT BLACK FRIDAY MAINTENANT OUVERT !</div>
+                                    <div class="email-body">
+                                        <p>{{prénom}},</p>
+                                        <p>Notre vente Black Friday est MAINTENANT EN LIGNE ! Ne manquez pas ces offres...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Wait node 3 -->
+                        <div class="workflow-node wait">
+                            <div class="node-header">
+                                <i class="fas fa-clock"></i>
+                                <h4>Attendre</h4>
+                            </div>
+                            <div class="node-content">
+                                <p>Attendre 12 heures</p>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="node-connector">
+                                <div class="connector-line"></div>
+                                <div class="connector-dot"></div>
+                            </div>
+                        </div>
+
+                        <!-- Email node 4 - Last Reminder -->
+                        <div class="workflow-node action">
+                            <div class="node-header">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email</h4>
+                            </div>
+                            <div class="node-content">
+                                <div class="node-email-preview">
+                                    <div class="email-subject">Dernières heures ! Nos offres se terminent bientôt</div>
+                                    <div class="email-body">
+                                        <p>{{prénom}},</p>
+                                        <p>Il ne reste que quelques heures pour profiter de nos offres Black Friday...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="node-actions">
+                                <button class="btn-edit"><i class="fas fa-pen"></i></button>
+                                <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Email Content Preview -->
+                <section class="email-preview-card">
+                    <div class="card-header with-tabs">
+                        <div class="content-tabs">
+                            <button class="tab-btn active">Email 1: Teaser</button>
+                            <button class="tab-btn">Email 2: Aperçu</button>
+                            <button class="tab-btn">Email 3: Lancement</button>
+                            <button class="tab-btn">Email 4: Rappel final</button>
+                        </div>
+                        <div class="content-actions">
+                            <button class="template-btn">
+                                <i class="fas fa-edit"></i>
+                                Modifier
+                            </button>
+                        </div>
+                    </div>
+                    <div class="email-preview">
+                        <div class="email-preview-header">
+                            <div class="preview-info">
+                                <div><strong>De:</strong> Emitly &lt;events@emitly.com&gt;</div>
+                                <div><strong>À:</strong> {{email}}</div>
+                                <div><strong>Objet:</strong> Black Friday arrive bientôt ! Préparez-vous 🔥</div>
+                            </div>
+                        </div>
+                        <div class="email-preview-content">
+                            <div class="email-template">
+                                <img src="https://via.placeholder.com/600x150?text=Black+Friday+Sale" alt="Email header" style="width: 100%;">
+                                <div class="email-body-content">
+                                    <h2>Notre plus grande vente de l'année approche !</h2>
+                                    <p>Bonjour {{prénom}},</p>
+                                    <p>Marquez votre calendrier ! Notre événement Black Friday annuel commence dans <strong>exactement 15 jours</strong>, et cette année, nous avons préparé des offres encore plus exceptionnelles.</p>
+                                    <p>Voici ce qui vous attend :</p>
+                                    <ul>
+                                        <li>Jusqu'à <strong>70% de réduction</strong> sur des milliers d'articles</li>
+                                        <li>Des offres exclusives pour nos clients fidèles</li>
+                                        <li>Des collections en édition limitée</li>
+                                        <li>Livraison gratuite sur toutes les commandes</li>
+                                    </ul>
+                                    <div style="background-color: #f7f7f7; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
+                                        <p style="font-size: 16px; margin-bottom: 10px;"><strong>Date de l'événement :</strong> 29 novembre 2024</p>
+                                        <p style="font-size: 16px;"><strong>Début des offres :</strong> Minuit (heure locale)</p>
+                                    </div>
+                                    <div class="cta-button">
+                                        <a href="#" class="btn">Ajouter à mon calendrier</a>
+                                    </div>
+                                    <p>Restez à l'écoute, nous vous enverrons bientôt un aperçu exclusif des meilleures offres !</p>
+                                    <p>À très bientôt,<br>L'équipe Emitly</p>
+                                </div>
+                                <div class="email-footer">
+                                    <p>© 2024 Emitly. Tous droits réservés.</p>
+                                    <p><a href="#">Se désabonner</a> · <a href="#">Préférences</a> · <a href="#">Voir dans le navigateur</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chat bubble -->
+    <div class="chat-bubble">
+        <i class="fas fa-comment"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -361,12 +361,18 @@ body {
 
 /* Performance Card */
 .performance-card {
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    background: linear-gradient(to bottom right, #ffffff, #fafafa);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 25px; /* Réduction de 30px à 25px */
     margin-bottom: 25px; /* Réduction de 30px à 25px */
     overflow-x: auto; /* Permet de scroller horizontalement si nécessaire */
+}
+
+.performance-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
@@ -3148,5 +3154,151 @@ body.menu-open {
     .condition-value {
         width: 100%;
         margin-top: 8px;
+    }
+}
+
+/* Conversations List Styles */
+.conversations-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.conversations-list {
+    margin-top: 20px;
+}
+
+.conversation-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    border-bottom: 1px solid #eaeaea;
+    transition: background-color 0.2s;
+}
+
+.conversation-item:last-child {
+    border-bottom: none;
+}
+
+.conversation-item:hover {
+    background-color: #f8f9fa;
+}
+
+.conversation-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+}
+
+.conversation-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.conversation-content {
+    flex: 1;
+}
+
+.conversation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.conversation-header h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.conversation-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.conversation-content p {
+    font-size: 13px;
+    color: #444;
+    margin: 0 0 8px 0;
+}
+
+.conversation-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.conversation-tags .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.conversation-status {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-left: 16px;
+}
+
+.conversation-status i {
+    margin-right: 4px;
+}
+
+.conversation-status.resolved {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.conversation-status.pending {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+/* Metric Icons Colors */
+.metric-icon.green {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.metric-icon.blue {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.metric-icon.purple {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.metric-icon.orange {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+/* Responsive Design for Conversations */
+@media screen and (max-width: 768px) {
+    .conversation-item {
+        flex-direction: column;
+    }
+
+    .conversation-status {
+        margin-left: 0;
+        margin-top: 8px;
+        align-self: flex-start;
+    }
+
+    .conversation-avatar {
+        margin-bottom: 12px;
     }
 } 

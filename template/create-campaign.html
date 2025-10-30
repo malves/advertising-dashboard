@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emitly - Create Campaign</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="create-campaign.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>emitly</h1>
+            </div>
+            <div class="workspace">
+                <div class="workspace-header">
+                    <div class="lock-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="workspace-title">
+                        <h3>My Workspace</h3>
+                        <p>Free plan</p>
+                    </div>
+                    <div class="dropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="create-campaign.html">
+                            <i class="fas fa-plus"></i>
+                            <span>Create campaign</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="automation.html">
+                            <i class="fas fa-robot"></i>
+                            <span>Automation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="subscriptions.html">
+                            <i class="fas fa-list"></i>
+                            <span>Subscriptions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>AI Chatbot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-plug"></i>
+                            <span>Integrations</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile-sidebar">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                </div>
+                <div class="user-info">
+                    <h4>James Passaquindici</h4>
+                    <p>jamespass@em.com</p>
+                </div>
+                <div class="settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                    <div class="search-shortcuts">
+                        <span>⌘</span>
+                        <span>K</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-button">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <button class="icon-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <div class="user-info">
+                            <h4>James Passaquindici</h4>
+                            <p>ID: 4827692</p>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Create Campaign Content -->
+            <div class="dashboard-content">
+                <div class="dashboard-header">
+                    <div>
+                        <h2>Create Campaign</h2>
+                        <p>Créez et lancez une nouvelle campagne en quelques étapes simples.</p>
+                    </div>
+                    <button class="create-campaigns-btn save-draft-btn">
+                        <i class="fas fa-save"></i>
+                        Enregistrer le brouillon
+                    </button>
+                </div>
+
+                <!-- Campaign Creation Form -->
+                <div class="campaign-creation">
+                    <!-- Campaign Types -->
+                    <section class="campaign-types-card">
+                        <h3>Type de Campagne</h3>
+                        <div class="campaign-types">
+                            <div class="campaign-type" data-type="email">
+                                <div class="type-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="type-info">
+                                    <h4>Email</h4>
+                                    <p>Campagne standard par email</p>
+                                </div>
+                            </div>
+                            <div class="campaign-type" data-type="sms">
+                                <div class="type-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="type-info">
+                                    <h4>SMS</h4>
+                                    <p>Campagne par SMS</p>
+                                </div>
+                            </div>
+                            <div class="campaign-type" data-type="notification">
+                                <div class="type-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="type-info">
+                                    <h4>Notification</h4>
+                                    <p>Notifications push</p>
+                                </div>
+                            </div>
+                            <div class="campaign-type" data-type="multi">
+                                <div class="type-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <div class="type-info">
+                                    <h4>Multi-canal</h4>
+                                    <p>Combinaison de plusieurs canaux</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Détails spécifiques aux types de campagnes - initialement cachés -->
+                    <div id="campaign-details-container" class="hidden">
+                        <!-- Template pour Email -->
+                        <div id="email-details" class="campaign-details-template">
+                            <section class="campaign-details-card">
+                                <div class="card-header">
+                                    <h3>Détails de la Campagne Email</h3>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="campaign-name-email">Nom de la campagne</label>
+                                        <input type="text" id="campaign-name-email" placeholder="Ex: Promotion d'été 2024">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="campaign-subject">Sujet de l'email</label>
+                                        <input type="text" id="campaign-subject" placeholder="Ex: Profitez de 25% de réduction ce week-end!">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sender-name">Nom de l'expéditeur</label>
+                                        <input type="text" id="sender-name" placeholder="Ex: Équipe Marketing">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sender-email">Email de l'expéditeur</label>
+                                        <input type="text" id="sender-email" placeholder="Ex: marketing@entreprise.com">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="campaign-audience">Public cible</label>
+                                        <div class="audience-selector">
+                                            <div class="selected-audience">
+                                                <span class="audience-tag">Clients actifs <i class="fas fa-times"></i></span>
+                                                <span class="audience-tag">Nouveaux inscrits <i class="fas fa-times"></i></span>
+                                            </div>
+                                            <button class="add-audience-btn">
+                                                <i class="fas fa-plus"></i> Ajouter un segment
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Planification</label>
+                                        <div class="schedule-options">
+                                            <div class="schedule-option active">
+                                                <input type="radio" id="send-now-email" name="schedule-email" checked>
+                                                <label for="send-now-email">Envoyer maintenant</label>
+                                            </div>
+                                            <div class="schedule-option">
+                                                <input type="radio" id="schedule-later-email" name="schedule-email">
+                                                <label for="schedule-later-email">Planifier pour plus tard</label>
+                                            </div>
+                                        </div>
+                                        <div class="schedule-datetime hidden">
+                                            <div class="date-picker">
+                                                <label>Date</label>
+                                                <input type="date">
+                                            </div>
+                                            <div class="time-picker">
+                                                <label>Heure</label>
+                                                <input type="time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Email Content -->
+                            <section class="email-content-card">
+                                <div class="card-header with-tabs">
+                                    <div class="content-tabs">
+                                        <button class="tab-btn active">Conception</button>
+                                        <button class="tab-btn">Code HTML</button>
+                                        <button class="tab-btn">Prévisualisation</button>
+                                    </div>
+                                    <div class="content-actions">
+                                        <button class="template-btn">
+                                            <i class="fas fa-th-large"></i>
+                                            Modèles
+                                        </button>
+                                        <button class="ai-write-btn">
+                                            <i class="fas fa-robot"></i>
+                                            Rédaction IA
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content-builder">
+                                    <div class="content-sidebar">
+                                        <div class="content-block-category">
+                                            <h4>Basique</h4>
+                                            <div class="content-blocks">
+                                                <div class="content-block">
+                                                    <i class="fas fa-font"></i>
+                                                    <span>Texte</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-image"></i>
+                                                    <span>Image</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-link"></i>
+                                                    <span>Bouton</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-grip-lines"></i>
+                                                    <span>Séparateur</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content-block-category">
+                                            <h4>Avancé</h4>
+                                            <div class="content-blocks">
+                                                <div class="content-block">
+                                                    <i class="fas fa-columns"></i>
+                                                    <span>Colonnes</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-video"></i>
+                                                    <span>Vidéo</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-store"></i>
+                                                    <span>Produits</span>
+                                                </div>
+                                                <div class="content-block">
+                                                    <i class="fas fa-poll"></i>
+                                                    <span>Sondage</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content-editor">
+                                            <div class="email-content-placeholder">
+                                                <h2>Votre titre attrayant ici</h2>
+                                                <p>Ceci est un exemple de contenu. Faites glisser et déposez des éléments depuis la barre latérale pour créer votre email.</p>
+                                                <button class="call-to-action">Appel à l'action</button>
+                                            </div>
+                                            <div class="email-footer-placeholder">
+                                                <p>Votre entreprise - <a href="#">Se désabonner</a> - <a href="#">Préférences</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Template pour SMS -->
+                        <div id="sms-details" class="campaign-details-template">
+                            <section class="campaign-details-card">
+                                <div class="card-header">
+                                    <h3>Détails de la Campagne SMS</h3>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="campaign-name-sms">Nom de la campagne</label>
+                                        <input type="text" id="campaign-name-sms" placeholder="Ex: Alerte promo flash">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sender-id">ID d'expéditeur</label>
+                                        <input type="text" id="sender-id" placeholder="Ex: ENTREPRISE">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="sms-content">Contenu du SMS</label>
+                                        <textarea id="sms-content" rows="4" placeholder="Entrez votre message (160 caractères max. pour 1 crédit)"></textarea>
+                                        <div class="character-count">
+                                            <span id="sms-character-count">0</span>/160 caractères
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="campaign-audience-sms">Public cible</label>
+                                        <div class="audience-selector">
+                                            <div class="selected-audience">
+                                                <span class="audience-tag">Clients avec numéro vérifié <i class="fas fa-times"></i></span>
+                                            </div>
+                                            <button class="add-audience-btn">
+                                                <i class="fas fa-plus"></i> Ajouter un segment
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Planification</label>
+                                        <div class="schedule-options">
+                                            <div class="schedule-option active">
+                                                <input type="radio" id="send-now-sms" name="schedule-sms" checked>
+                                                <label for="send-now-sms">Envoyer maintenant</label>
+                                            </div>
+                                            <div class="schedule-option">
+                                                <input type="radio" id="schedule-later-sms" name="schedule-sms">
+                                                <label for="schedule-later-sms">Planifier pour plus tard</label>
+                                            </div>
+                                        </div>
+                                        <div class="schedule-datetime hidden">
+                                            <div class="date-picker">
+                                                <label>Date</label>
+                                                <input type="date">
+                                            </div>
+                                            <div class="time-picker">
+                                                <label>Heure</label>
+                                                <input type="time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Template pour Notification -->
+                        <div id="notification-details" class="campaign-details-template">
+                            <section class="campaign-details-card">
+                                <div class="card-header">
+                                    <h3>Détails de la Campagne de Notification</h3>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="campaign-name-notif">Nom de la campagne</label>
+                                        <input type="text" id="campaign-name-notif" placeholder="Ex: Mise à jour de l'application">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notification-title">Titre de la notification</label>
+                                        <input type="text" id="notification-title" placeholder="Ex: Nouvelle fonctionnalité disponible!">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="notification-body">Contenu de la notification</label>
+                                        <textarea id="notification-body" rows="2" placeholder="Message court et précis de la notification"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notification-image">Image (optionnel)</label>
+                                        <input type="file" id="notification-image" accept="image/*">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notification-action">URL au clic</label>
+                                        <input type="text" id="notification-action" placeholder="Ex: https://example.com/promo">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="campaign-audience-notif">Plateformes</label>
+                                        <div class="platform-selector">
+                                            <div class="platform-option">
+                                                <input type="checkbox" id="android" name="platform" checked>
+                                                <label for="android">Android</label>
+                                            </div>
+                                            <div class="platform-option">
+                                                <input type="checkbox" id="ios" name="platform" checked>
+                                                <label for="ios">iOS</label>
+                                            </div>
+                                            <div class="platform-option">
+                                                <input type="checkbox" id="web" name="platform">
+                                                <label for="web">Web</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Planification</label>
+                                        <div class="schedule-options">
+                                            <div class="schedule-option active">
+                                                <input type="radio" id="send-now-notif" name="schedule-notif" checked>
+                                                <label for="send-now-notif">Envoyer maintenant</label>
+                                            </div>
+                                            <div class="schedule-option">
+                                                <input type="radio" id="schedule-later-notif" name="schedule-notif">
+                                                <label for="schedule-later-notif">Planifier pour plus tard</label>
+                                            </div>
+                                        </div>
+                                        <div class="schedule-datetime hidden">
+                                            <div class="date-picker">
+                                                <label>Date</label>
+                                                <input type="date">
+                                            </div>
+                                            <div class="time-picker">
+                                                <label>Heure</label>
+                                                <input type="time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Template pour Multi-canal -->
+                        <div id="multi-details" class="campaign-details-template">
+                            <section class="campaign-details-card">
+                                <div class="card-header">
+                                    <h3>Détails de la Campagne Multi-canal</h3>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="campaign-name-multi">Nom de la campagne</label>
+                                        <input type="text" id="campaign-name-multi" placeholder="Ex: Lancement produit global">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="campaign-goal">Objectif de la campagne</label>
+                                        <select id="campaign-goal">
+                                            <option value="awareness">Notoriété</option>
+                                            <option value="conversion">Conversion</option>
+                                            <option value="retention">Fidélisation</option>
+                                            <option value="reactivation">Réactivation</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Canaux à utiliser</label>
+                                        <div class="channels-grid">
+                                            <div class="channel-option">
+                                                <input type="checkbox" id="channel-email" name="channel" checked>
+                                                <label for="channel-email">
+                                                    <i class="fas fa-envelope"></i>
+                                                    Email
+                                                </label>
+                                            </div>
+                                            <div class="channel-option">
+                                                <input type="checkbox" id="channel-sms" name="channel" checked>
+                                                <label for="channel-sms">
+                                                    <i class="fas fa-mobile-alt"></i>
+                                                    SMS
+                                                </label>
+                                            </div>
+                                            <div class="channel-option">
+                                                <input type="checkbox" id="channel-notif" name="channel">
+                                                <label for="channel-notif">
+                                                    <i class="fas fa-bell"></i>
+                                                    Notification
+                                                </label>
+                                            </div>
+                                            <div class="channel-option">
+                                                <input type="checkbox" id="channel-social" name="channel">
+                                                <label for="channel-social">
+                                                    <i class="fas fa-share-alt"></i>
+                                                    Réseaux sociaux
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="campaign-audience-multi">Public cible</label>
+                                        <div class="audience-selector">
+                                            <div class="selected-audience">
+                                                <span class="audience-tag">Tous contacts <i class="fas fa-times"></i></span>
+                                            </div>
+                                            <button class="add-audience-btn">
+                                                <i class="fas fa-plus"></i> Ajouter un segment
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Séquence des messages</label>
+                                        <div class="sequence-timeline">
+                                            <div class="sequence-step">
+                                                <div class="step-day">Jour 1</div>
+                                                <div class="step-channel">Email d'introduction</div>
+                                                <button class="edit-step-btn"><i class="fas fa-pen"></i></button>
+                                            </div>
+                                            <div class="sequence-step">
+                                                <div class="step-day">Jour 3</div>
+                                                <div class="step-channel">SMS de rappel</div>
+                                                <button class="edit-step-btn"><i class="fas fa-pen"></i></button>
+                                            </div>
+                                            <div class="sequence-step">
+                                                <div class="step-day">Jour 7</div>
+                                                <div class="step-channel">Notification push</div>
+                                                <button class="edit-step-btn"><i class="fas fa-pen"></i></button>
+                                            </div>
+                                            <button class="add-step-btn"><i class="fas fa-plus"></i> Ajouter une étape</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="campaign-actions">
+                            <button class="btn-secondary">Annuler</button>
+                            <button class="btn-secondary">Prévisualiser</button>
+                            <button class="btn-primary">Envoyer la campagne</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chat bubble -->
+    <div class="chat-bubble">
+        <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Modal de sélection des segments -->
+    <div id="segments-modal" class="modal segments-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un segment</h2>
+                <button class="close-modal" id="close-segments-modal"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Recherche de segments -->
+                <div class="segments-search">
+                    <div class="search-input-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Rechercher un segment..." id="segment-search">
+                    </div>
+                    <button class="btn-primary btn-new-segment">
+                        <i class="fas fa-plus"></i> Créer un segment
+                    </button>
+                </div>
+                
+                <!-- Liste des segments disponibles -->
+                <div class="segments-list">
+                    <h4>Segments disponibles</h4>
+                    <div class="segment-items">
+                        <div class="segment-item" data-segment="clients-actifs">
+                            <div class="segment-check">
+                                <input type="checkbox" id="segment-1">
+                                <label for="segment-1"></label>
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-name">Clients actifs</span>
+                                <span class="segment-count">1,245 contacts</span>
+                            </div>
+                        </div>
+                        <div class="segment-item" data-segment="prospects">
+                            <div class="segment-check">
+                                <input type="checkbox" id="segment-2">
+                                <label for="segment-2"></label>
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-name">Prospects</span>
+                                <span class="segment-count">824 contacts</span>
+                            </div>
+                        </div>
+                        <div class="segment-item" data-segment="inactifs">
+                            <div class="segment-check">
+                                <input type="checkbox" id="segment-3">
+                                <label for="segment-3"></label>
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-name">Inactifs depuis 30 jours</span>
+                                <span class="segment-count">328 contacts</span>
+                            </div>
+                        </div>
+                        <div class="segment-item" data-segment="premium">
+                            <div class="segment-check">
+                                <input type="checkbox" id="segment-4">
+                                <label for="segment-4"></label>
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-name">Clients Premium</span>
+                                <span class="segment-count">145 contacts</span>
+                            </div>
+                        </div>
+                        <div class="segment-item" data-segment="newsletter">
+                            <div class="segment-check">
+                                <input type="checkbox" id="segment-5">
+                                <label for="segment-5"></label>
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-name">Abonnés Newsletter</span>
+                                <span class="segment-count">2,845 contacts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form de création de segment -->
+                <div class="create-segment-form hidden">
+                    <h4>Créer un nouveau segment</h4>
+                    <div class="form-group">
+                        <label for="new-segment-name">Nom du segment</label>
+                        <input type="text" id="new-segment-name" placeholder="Ex: Clients VIP">
+                    </div>
+                    <div class="form-group">
+                        <label for="segment-description">Description (optionnelle)</label>
+                        <input type="text" id="segment-description" placeholder="Brève description du segment">
+                    </div>
+                    <div class="form-group">
+                        <label for="segment-criteria">Critères de segmentation</label>
+                        <div class="criteria-builder">
+                            <div class="criteria-row">
+                                <select class="criteria-field">
+                                    <option value="email_open">Ouverture d'email</option>
+                                    <option value="click_rate">Taux de clic</option>
+                                    <option value="purchase">Achat récent</option>
+                                    <option value="location">Localisation</option>
+                                    <option value="subscription_date">Date d'inscription</option>
+                                </select>
+                                <select class="criteria-operator">
+                                    <option value="greater_than">Plus grand que</option>
+                                    <option value="less_than">Plus petit que</option>
+                                    <option value="equal">Égal à</option>
+                                    <option value="contains">Contient</option>
+                                </select>
+                                <input type="text" class="criteria-value" placeholder="Valeur">
+                                <button class="remove-criteria"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <button class="add-criteria-btn"><i class="fas fa-plus"></i> Ajouter un critère</button>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-secondary" id="cancel-create-segment">Annuler</button>
+                        <button class="btn-primary" id="save-new-segment">Créer le segment</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-segments">Annuler</button>
+                <button class="btn-primary" id="apply-segments">Appliquer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay pour la modal -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="create-campaign.js"></script>
+</body>
+</html> 

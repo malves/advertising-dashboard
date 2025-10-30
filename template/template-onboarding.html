@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emitly - Template Onboarding</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="automation.css">
+    <link rel="stylesheet" href="template-workflow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Drawflow CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/drawflow@0.0.59/dist/drawflow.min.css">
+    <style>
+        /* Styles spécifiques pour l'éditeur de template */
+        .template-editor-container {
+            display: flex;
+            height: calc(100vh - 180px);
+            overflow: hidden;
+        }
+        
+        .workflow-sidebar {
+            width: 300px;
+            background-color: #fff;
+            border-right: 1px solid #eaeaea;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        
+        .workflow-canvas {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Drawflow custom styles */
+        #drawflow {
+            height: 100%;
+            width: 100%;
+            background-color: #f9f9f9;
+            background-image: radial-gradient(#e3e3e3 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+        }
+        
+        .drawflow .drawflow-node {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            width: 280px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .drawflow .drawflow-node.selected {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border: 1px solid #1c3542;
+        }
+        
+        .drawflow .connection .main-path {
+            stroke: #1c3542;
+            stroke-width: 2px;
+        }
+        
+        .drawflow .connection .main-path:hover {
+            stroke: #2196f3;
+            stroke-width: 2.5px;
+        }
+        
+        .drawflow .drawflow-node .inputs .input,
+        .drawflow .drawflow-node .outputs .output {
+            background: #1c3542;
+            border: 1px solid #1c3542;
+        }
+        
+        .drawflow .drawflow-node .inputs .input:hover,
+        .drawflow .drawflow-node .outputs .output:hover {
+            background: #2196f3;
+            border: 1px solid #2196f3;
+        }
+        
+        .trigger-node {
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .action-node {
+            background-color: #fff;
+            border: 2px solid #eaeaea;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .condition-node {
+            background-color: #fff8e1;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .delay-node {
+            background-color: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .node-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .node-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .trigger-node .node-icon {
+            background-color: #2196f3;
+        }
+        
+        .action-node .node-icon {
+            background-color: #1c3542;
+        }
+        
+        .condition-node .node-icon {
+            background-color: #ffc107;
+        }
+        
+        .delay-node .node-icon {
+            background-color: #4caf50;
+        }
+        
+        .node-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .node-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .node-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .node-content {
+            padding: 10px;
+            background-color: rgba(0,0,0,0.03);
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        
+        .node-options {
+            margin-top: 12px;
+        }
+        
+        .node-option {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .node-option-label {
+            width: 100px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        
+        .node-option-value {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .workflow-tools {
+            margin-bottom: 20px;
+        }
+        
+        .workflow-tools h4 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .drag-item {
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            cursor: move;
+            margin-bottom: 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .drag-item:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .drag-item i {
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* Styles pour les boutons d'action du workflow */
+        .drawflow-actions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .drawflow-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            color: #1c3542;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .drawflow-action:hover {
+            background-color: #1c3542;
+            color: white;
+        }
+        
+        /* Le reste des styles (non modifiés) */
+        .template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-template {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-save {
+            background-color: #1c3542;
+            color: white;
+            border: none;
+        }
+        
+        .btn-save:hover {
+            background-color: #15242d;
+        }
+        
+        .btn-preview {
+            background-color: white;
+            color: #1c3542;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .btn-preview:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .btn-exit {
+            background-color: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .btn-exit:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .template-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .template-info h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            width: 140px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .info-value {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .info-input {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 13px;
+            width: 100%;
+        }
+        
+        /* Styles pour les branches conditionnelles */
+        .branch-container {
+            display: flex;
+            margin: 20px 0;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .branch {
+            width: 45%;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .branch-header {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .branch-yes .branch-header {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        
+        .branch-no .branch-header {
+            background-color: rgba(255, 87, 34, 0.1);
+            color: #ff5722;
+        }
+        
+        /* Styles pour la barre d'outils d'édition de contenu */
+        .email-editor {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            max-width: 90vw;
+            height: 600px;
+            max-height: 90vh;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .email-editor.active {
+            display: flex;
+        }
+        
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .editor-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: 15px;
+            padding: 10px 20px;
+            border-bottom: 1px solid #eaeaea;
+            flex-wrap: wrap;
+        }
+        
+        .editor-group {
+            display: flex;
+            gap: 5px;
+            border-right: 1px solid #eaeaea;
+            padding-right: 15px;
+        }
+        
+        .editor-group:last-child {
+            border-right: none;
+        }
+        
+        .toolbar-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+        }
+        
+        .toolbar-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .editor-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .editor-main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .editor-sidebar {
+            width: 250px;
+            border-left: 1px solid #eaeaea;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .editor-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 20px;
+            border-top: 1px solid #eaeaea;
+            gap: 10px;
+        }
+        
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .email-mock {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .email-mock .header {
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .email-mock .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #1c3542;
+            margin-bottom: 10px;
+        }
+        
+        .email-mock h1 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1c3542;
+        }
+        
+        .email-mock p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .email-mock .cta {
+            display: inline-block;
+            background-color: #1c3542;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .email-mock .footer {
+            border-top: 1px solid #eaeaea;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+        
+        /* Overlay pour l'éditeur */
+        .editor-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .editor-overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>emitly</h1>
+            </div>
+            <div class="workspace">
+                <div class="workspace-header">
+                    <div class="lock-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="workspace-title">
+                        <h3>My Workspace</h3>
+                        <p>Free plan</p>
+                    </div>
+                    <div class="dropdown">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="create-campaign.html">
+                            <i class="fas fa-plus"></i>
+                            <span>Create campaign</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="automation.html">
+                            <i class="fas fa-robot"></i>
+                            <span>Automation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="subscriptions.html">
+                            <i class="fas fa-list"></i>
+                            <span>Subscriptions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>AI Chatbot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="integrations.html">
+                            <i class="fas fa-plug"></i>
+                            <span>Integrations</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-profile-sidebar">
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                </div>
+                <div class="user-info">
+                    <h4>James Passaquindici</h4>
+                    <p>jamespass@em.com</p>
+                </div>
+                <div class="settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                    <div class="search-shortcuts">
+                        <span>⌘</span>
+                        <span>K</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-button">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <button class="icon-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <div class="user-info">
+                            <h4>James Passaquindici</h4>
+                            <p>ID: 4827692</p>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Template Editor Content -->
+            <div class="dashboard-content">
+                <div class="template-header">
+                    <div>
+                        <h2>Template d'onboarding</h2>
+                        <p>Créez une séquence d'accueil pour les nouveaux utilisateurs</p>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn-template btn-exit" onclick="window.location.href='automation.html'">
+                            <i class="fas fa-times"></i>
+                            Annuler
+                        </button>
+                        <button class="btn-template btn-preview">
+                            <i class="fas fa-eye"></i>
+                            Aperçu
+                        </button>
+                        <button class="btn-template btn-save" id="save-workflow">
+                            <i class="fas fa-save"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+
+                <div class="template-info">
+                    <h3>Paramètres de la séquence</h3>
+                    <div class="info-row">
+                        <div class="info-label">Nom de la séquence</div>
+                        <div class="info-value">
+                            <input type="text" class="info-input" value="Séquence d'onboarding" placeholder="Donnez un nom à votre séquence">
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Déclencheur</div>
+                        <div class="info-value">
+                            <select class="info-input">
+                                <option>Nouvelle inscription</option>
+                                <option>Nouveau compte créé</option>
+                                <option>Tag ajouté</option>
+                                <option>Événement personnalisé</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Tags à appliquer</div>
+                        <div class="info-value">
+                            <input type="text" class="info-input" value="nouveau-membre, onboarding" placeholder="Séparez les tags par des virgules">
+                        </div>
+                    </div>
+                            </div>
+
+                <div class="template-editor-container">
+                    <div class="workflow-sidebar">
+                        <div class="workflow-tools">
+                            <h4>Éléments de workflow</h4>
+                            <div class="drag-item" draggable="true" data-node-type="action" data-node-icon="envelope" data-node-name="Email">
+                                <i class="fas fa-envelope"></i>
+                                Envoyer un email
+                            </div>
+                            <div class="drag-item" draggable="true" data-node-type="delay" data-node-icon="clock" data-node-name="Délai">
+                                <i class="fas fa-clock"></i>
+                                Attendre
+                            </div>
+                            <div class="drag-item" draggable="true" data-node-type="condition" data-node-icon="code-branch" data-node-name="Condition">
+                                <i class="fas fa-code-branch"></i>
+                                Condition
+                            </div>
+                            <div class="drag-item" draggable="true" data-node-type="action" data-node-icon="tag" data-node-name="Tag">
+                                <i class="fas fa-tag"></i>
+                                Ajouter un tag
+                            </div>
+                            <div class="drag-item" draggable="true" data-node-type="action" data-node-icon="sms" data-node-name="SMS">
+                                <i class="fas fa-sms"></i>
+                                Envoyer un SMS
+                            </div>
+                            <div class="drag-item" draggable="true" data-node-type="action" data-node-icon="chart-line" data-node-name="Analytics">
+                                <i class="fas fa-chart-line"></i>
+                                Mettre à jour les analytics
+                            </div>
+                        </div>
+
+                        <div class="workflow-tools">
+                            <h4>Propriétés du contact</h4>
+                            <div class="drag-item">
+                                <i class="fas fa-user"></i>
+                                Nom
+                            </div>
+                            <div class="drag-item">
+                                <i class="fas fa-envelope"></i>
+                                Email
+                            </div>
+                            <div class="drag-item">
+                                <i class="fas fa-phone"></i>
+                                Téléphone
+                            </div>
+                            <div class="drag-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Localisation
+                            </div>
+                            <div class="drag-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                Achats
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-canvas">
+                        <div id="drawflow"></div>
+                        
+                        <div class="drawflow-actions">
+                            <div class="drawflow-action" id="zoom-in">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                            <div class="drawflow-action" id="zoom-out">
+                                <i class="fas fa-search-minus"></i>
+                            </div>
+                            <div class="drawflow-action" id="reset-zoom">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Email Editor Overlay -->
+    <div class="editor-overlay"></div>
+    
+    <!-- Email Editor Modal -->
+    <div class="email-editor">
+        <div class="editor-header">
+            <div class="editor-title">Éditer l'email de bienvenue</div>
+            <button class="close-editor"><i class="fas fa-times"></i></button>
+                        </div>
+
+        <div class="editor-toolbar">
+            <div class="editor-group">
+                <button class="toolbar-btn"><i class="fas fa-bold"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-italic"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-underline"></i></button>
+                            </div>
+            <div class="editor-group">
+                <button class="toolbar-btn"><i class="fas fa-align-left"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-align-center"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-align-right"></i></button>
+                            </div>
+            <div class="editor-group">
+                <button class="toolbar-btn"><i class="fas fa-link"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-image"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
+                            </div>
+            <div class="editor-group">
+                <button class="toolbar-btn"><i class="fas fa-palette"></i></button>
+                <button class="toolbar-btn"><i class="fas fa-text-height"></i></button>
+                            </div>
+                        </div>
+
+        <div class="editor-content">
+            <div class="editor-main">
+                <div class="email-mock">
+                    <div class="header">
+                        <div class="logo">emitly</div>
+                            </div>
+                    
+                    <h1>Bienvenue dans notre communauté!</h1>
+                    
+                    <p>Bonjour {first_name},</p>
+                    
+                    <p>Nous sommes ravis de vous accueillir parmi nous! Votre compte a été créé avec succès et vous pouvez maintenant profiter de tous nos services.</p>
+                    
+                    <p>Pour commencer:</p>
+                    
+                    <ul>
+                        <li>Complétez votre profil pour personnaliser votre expérience</li>
+                        <li>Explorez notre tableau de bord pour découvrir toutes les fonctionnalités</li>
+                        <li>Consultez notre centre d'aide pour des conseils utiles</li>
+                    </ul>
+                    
+                    <a href="#" class="cta">Commencer maintenant</a>
+                    
+                    <p>Si vous avez des questions, n'hésitez pas à nous contacter. Notre équipe support est là pour vous aider.</p>
+                    
+                    <p>Cordialement,<br>
+                    L'équipe Emitly</p>
+                    
+                    <div class="footer">
+                        <p>© 2023 Emitly. Tous droits réservés.</p>
+                        <p>Vous recevez cet email car vous vous êtes inscrit sur notre plateforme. <a href="#">Se désabonner</a></p>
+                                    </div>
+                                </div>
+                            </div>
+            
+            <div class="editor-sidebar">
+                <h4>Variables disponibles</h4>
+                <div class="drag-item">{first_name}</div>
+                <div class="drag-item">{last_name}</div>
+                <div class="drag-item">{email}</div>
+                <div class="drag-item">{signup_date}</div>
+                <div class="drag-item">{company}</div>
+                <div class="drag-item">{unsubscribe_link}</div>
+            </div>
+        </div>
+        
+        <div class="editor-footer">
+            <button class="btn-template btn-exit close-editor">Annuler</button>
+            <button class="btn-template btn-preview">Aperçu</button>
+            <button class="btn-template btn-save">Enregistrer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Drawflow JS -->
+    <script src="https://cdn.jsdelivr.net/npm/drawflow@0.0.59/dist/drawflow.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation de Drawflow
+            var id = document.getElementById("drawflow");
+            var editor = new Drawflow(id);
+            editor.reroute = true;
+            editor.start();
+            
+            // Configuration des contrôles zoom
+            document.getElementById('zoom-in').addEventListener('click', function() {
+                editor.zoom_in();
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', function() {
+                editor.zoom_out();
+            });
+            
+            document.getElementById('reset-zoom').addEventListener('click', function() {
+                editor.zoom_reset();
+            });
+            
+            // Fonction pour créer un node d'onboarding
+            function createTriggerNode() {
+                const nodeHtml = `
+                <div class="trigger-node">
+                    <div class="node-header">
+                        <div class="node-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="node-title">Nouvelle inscription</div>
+                            <div class="node-actions">
+                            <button><i class="fas fa-cog"></i></button>
+                        </div>
+                    </div>
+                    <div class="node-options">
+                        <div class="node-option">
+                            <div class="node-option-label">Source</div>
+                            <div class="node-option-value">Tous les canaux</div>
+                            </div>
+                        <div class="node-option">
+                            <div class="node-option-label">Tags</div>
+                            <div class="node-option-value">nouveau-membre</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                
+                return nodeHtml;
+            }
+            
+            function createEmailNode() {
+                const nodeHtml = `
+                <div class="action-node">
+                            <div class="node-header">
+                        <div class="node-icon">
+                                <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="node-title">Email de bienvenue</div>
+                        <div class="node-actions">
+                            <button class="btn-edit-email"><i class="fas fa-pen"></i></button>
+                            <button><i class="fas fa-cog"></i></button>
+                        </div>
+                            </div>
+                            <div class="node-content">
+                        Sujet: Bienvenue dans notre communauté!<br>
+                        De: support@votreappli.com<br>
+                        <span style="color: #666; font-style: italic;">Cliquez sur l'icône d'édition pour modifier le contenu</span>
+                                    </div>
+                                </div>
+                `;
+                
+                return nodeHtml;
+            }
+            
+            function createDelayNode() {
+                const nodeHtml = `
+                <div class="delay-node">
+                    <div class="node-header">
+                        <div class="node-icon">
+                            <i class="fas fa-clock"></i>
+                            </div>
+                        <div class="node-title">Attendre</div>
+                            <div class="node-actions">
+                            <button><i class="fas fa-cog"></i></button>
+                        </div>
+                            </div>
+                    <div class="node-options">
+                        <div class="node-option">
+                            <div class="node-option-label">Durée</div>
+                            <div class="node-option-value">2 jours</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                
+                return nodeHtml;
+            }
+            
+            function createConditionNode() {
+                const nodeHtml = `
+                <div class="condition-node">
+                    <div class="node-header">
+                        <div class="node-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="node-title">A cliqué sur un lien?</div>
+                        <div class="node-actions">
+                            <button><i class="fas fa-cog"></i></button>
+                        </div>
+                    </div>
+                    <div class="node-options">
+                        <div class="node-option">
+                            <div class="node-option-label">Condition</div>
+                            <div class="node-option-value">A cliqué sur email #2</div>
+                            </div>
+                        <div class="node-option">
+                            <div class="node-option-label">Période</div>
+                            <div class="node-option-value">Dans les 3 jours</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                
+                return nodeHtml;
+            }
+            
+            // Ajouter le nœud de départ (trigger)
+            editor.addNode('trigger', 1, 0, 100, 100, 'trigger', {}, createTriggerNode());
+            
+            // Ajouter un nœud d'email
+            editor.addNode('email1', 1, 1, 100, 300, 'email', {}, createEmailNode());
+            
+            // Ajouter un nœud de délai
+            editor.addNode('delay1', 1, 1, 100, 500, 'delay', {}, createDelayNode());
+            
+            // Ajouter un autre nœud d'email
+            editor.addNode('email2', 1, 1, 100, 700, 'email', {}, createEmailNode());
+            
+            // Ajouter un nœud de condition
+            editor.addNode('condition1', 2, 1, 100, 900, 'condition', {}, createConditionNode());
+            
+            // Connecter les nœuds
+            editor.addConnection('trigger', 'email1', 'output_1', 'input_1');
+            editor.addConnection('email1', 'delay1', 'output_1', 'input_1');
+            editor.addConnection('delay1', 'email2', 'output_1', 'input_1');
+            editor.addConnection('email2', 'condition1', 'output_1', 'input_1');
+            
+            // Drag & Drop depuis la sidebar
+            var dragItems = document.getElementsByClassName('drag-item');
+            
+            for (let i = 0; i < dragItems.length; i++) {
+                if (dragItems[i].hasAttribute('draggable')) {
+                    dragItems[i].addEventListener('dragstart', drag);
+                }
+            }
+            
+            document.getElementById('drawflow').addEventListener('drop', drop);
+            document.getElementById('drawflow').addEventListener('dragover', allowDrop);
+            
+            function drag(e) {
+                if (e.target.hasAttribute('data-node-type')) {
+                    e.dataTransfer.setData('node-type', e.target.getAttribute('data-node-type'));
+                    e.dataTransfer.setData('node-icon', e.target.getAttribute('data-node-icon'));
+                    e.dataTransfer.setData('node-name', e.target.getAttribute('data-node-name'));
+                }
+            }
+            
+            function allowDrop(e) {
+                e.preventDefault();
+            }
+            
+            function drop(e) {
+                e.preventDefault();
+                
+                // Récupérer position de la souris par rapport au canvas
+                const pos = editor.canvas_x;
+                const posY = editor.canvas_y;
+                
+                const nodeType = e.dataTransfer.getData('node-type');
+                const nodeIcon = e.dataTransfer.getData('node-icon');
+                const nodeName = e.dataTransfer.getData('node-name');
+                
+                if (nodeType) {
+                    let nodeHtml;
+                    let inputs = 1;
+                    let outputs = 1;
+                    
+                    // Créer le HTML du nœud en fonction du type
+                    switch(nodeType) {
+                        case 'action':
+                            nodeHtml = `
+                            <div class="action-node">
+                                <div class="node-header">
+                                    <div class="node-icon">
+                                        <i class="fas fa-${nodeIcon}"></i>
+                                    </div>
+                                    <div class="node-title">${nodeName}</div>
+                                    <div class="node-actions">
+                                        <button class="btn-edit-${nodeType}"><i class="fas fa-pen"></i></button>
+                                        <button><i class="fas fa-cog"></i></button>
+                                    </div>
+                                </div>
+                                <div class="node-content">
+                                    Nouveau nœud ${nodeName}
+                                </div>
+                            </div>
+                            `;
+                            break;
+                        case 'delay':
+                            nodeHtml = createDelayNode();
+                            break;
+                        case 'condition':
+                            nodeHtml = createConditionNode();
+                            outputs = 2; // Les conditions ont deux sorties (Oui/Non)
+                            break;
+                        default:
+                            nodeHtml = createEmailNode();
+                    }
+                    
+                    // Ajouter le nœud avec une position relative à la position du curseur
+                    const randomId = `node_${Date.now()}`;
+                    editor.addNode(randomId, inputs, outputs, e.clientX - pos, e.clientY - posY, nodeType, {}, nodeHtml);
+                    
+                    // Réinitialiser l'écouteur d'événements pour les nouveaux boutons d'édition
+                    const editButtons = document.querySelectorAll('.btn-edit-email');
+                    editButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            document.querySelector('.email-editor').classList.add('active');
+                            document.querySelector('.editor-overlay').classList.add('active');
+                        });
+                    });
+                }
+            }
+            
+            // Sauvegarder le workflow
+            document.getElementById('save-workflow').addEventListener('click', function() {
+                // Obtenir les données du workflow en JSON
+                const exportData = editor.export();
+                console.log(exportData);
+                
+                // Ici vous pouvez ajouter le code pour envoyer ces données à votre backend
+                alert("Workflow sauvegardé!");
+            });
+            
+            // Gestion de l'ouverture/fermeture de l'éditeur d'email
+            const editButtons = document.querySelectorAll('.btn-edit-email');
+            const closeEditorButtons = document.querySelectorAll('.close-editor');
+            const emailEditor = document.querySelector('.email-editor');
+            const editorOverlay = document.querySelector('.editor-overlay');
+            
+            // Ouverture de l'éditeur
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    emailEditor.classList.add('active');
+                    editorOverlay.classList.add('active');
+                });
+            });
+            
+            // Fermeture de l'éditeur
+            closeEditorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    emailEditor.classList.remove('active');
+                    editorOverlay.classList.remove('active');
+                });
+            });
+            
+            // Fermer en cliquant sur l'overlay
+            editorOverlay.addEventListener('click', function() {
+                emailEditor.classList.remove('active');
+                editorOverlay.classList.remove('active');
+            });
+            
+            // Empêcher la propagation des clics dans l'éditeur
+            emailEditor.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html> 
